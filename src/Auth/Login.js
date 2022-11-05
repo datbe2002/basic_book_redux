@@ -14,7 +14,7 @@ export default function Login() {
     };
     useEffect(() => {
         if (user != null) {
-            navigate('/dashboard')
+            navigate('/modify-page')
         }
     }, [user])
     return (

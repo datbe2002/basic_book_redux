@@ -18,10 +18,16 @@ import { AnimatePresence } from "framer-motion";
 // ]);
 
 import React from 'react'
+import PrivateRoute from "../Components/PrivateRoute";
+import ModifyPage from "../Components/ModifyPage";
 
 export default function Router() {
     const element = useRoutes(
         [
+            {
+                path: '/',
+                element: <HomePage />,
+            },
             {
                 path: "/login",
                 element: <Login />,
@@ -29,6 +35,16 @@ export default function Router() {
             {
                 path: "/dashboard",
                 element: <HomePage />,
+            },
+            {
+                element: <PrivateRoute />,
+                children: [
+                    {
+                        path: '/modify-page',
+                        element: <ModifyPage />,
+                    },
+
+                ]
             },
         ]
     )

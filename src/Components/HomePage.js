@@ -1,4 +1,4 @@
-import { Box, Button, CardActions, Container, Grid } from '@mui/material';
+import { Container, Grid } from '@mui/material';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import Card from '@mui/material/Card';
@@ -6,7 +6,6 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
-import { BoltRounded } from '@mui/icons-material';
 
 
 export default function HomePage() {
@@ -25,17 +24,12 @@ export default function HomePage() {
 
     }, [])
 
-
-
     return (
         <Container sx={{ mt: 5 }}>
             <Typography variant='h3' sx={{ fontWeight: "bold", textAlign: "center", mb: 5 }}>Collection</Typography>
             <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-
                 {bookList.map(book =>
                     <Grid item xs={2} sm={4} md={4} key={book.id}>
-
-
                         <Card sx={{ maxWidth: 345 }}>
                             <CardActionArea>
                                 <CardMedia
@@ -54,15 +48,9 @@ export default function HomePage() {
                                 </CardContent>
                             </CardActionArea>
                         </Card>
-
-
                     </Grid>
-
-
                 )}
-
             </Grid>
-
         </Container>
     )
 
