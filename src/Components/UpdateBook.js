@@ -3,6 +3,7 @@ import { Box } from '@mui/system';
 import React from 'react'
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
+import axios from 'axios';
 
 export default function UpdateBook({ book, reload }) {
     const [open, setOpen] = React.useState(false);
@@ -13,19 +14,35 @@ export default function UpdateBook({ book, reload }) {
 
     const formik = useFormik({
         initialValues: {
-            bookName: '',
-            quantity: '',
-            description: '',
+            id: book.id,
+            bookName: book.bookName,
+            quantity: book.quantity,
+            description: book.description,
         },
         onSubmit: (values) => {
-            // const newObject = values
-            console.log('aaaaa')
+            const newObject = values
+            //CO ID
+            // console.log({ ...newObject, id: book.id })
+            console.log(newObject)
 
-            // dispatch(addUserForm({ ...newObject, id: nanoid() }));
+            const updateUrl = `https://6362307666f75177ea28c41b.mockapi.io/books/${newObject.id}`;
+            async function updateBookData() {
+
+                const updateData = await axios.put(updateUrl, {
+                    bookName: newObject.bookName,
+                    quantity: newObject.quantity,
+                    description: newObject.description,
+
+                })
+                reload()
+
+            }
+            updateBookData();
+            handleClose();
 
         },
         validationSchema: Yup.object({
-            name: Yup.string().required("Required.").min(2, "Must be 2 characters or more"),
+            bookName: Yup.string().required("Required.").min(2, "Must be 2 characters or more"),
             quantity: Yup.number().integer().typeError("Please enter a valid number").required("Required."),
             description: Yup.string().required("Required.").min(10, "Must be 10 characters or more"),
 
@@ -98,22 +115,22 @@ export default function UpdateBook({ book, reload }) {
                                     error={formik.touched.description && Boolean(formik.errors.description)}
                                     helperText={formik.touched.description && formik.errors.description}></TextField>
 
-                                {/* <div style={{ display: "flex", justifyContent: "center", gap: 10, marginTop: 20 }}> */}
-                                <button type='submit' sx={{
-                                    backgroundColor: "#236DC9", color: "white", fontWeight: "bold", "&:hover": {
-                                        backgroundColor: "#154178"
-                                    }
-                                }} >
-                                    Submit
-                                </button>
-                                <Button sx={{
-                                    backgroundColor: "#FF0000", color: "white", fontWeight: "bold", "&:hover": {
-                                        backgroundColor: "#880808"
-                                    }
-                                }} onClick={handleClose}>
-                                    Cancel
-                                </Button>
-                                {/* </div> */}
+                                <div style={{ display: "flex", justifyContent: "center", gap: 10, marginTop: 20 }}>
+                                    <Button type='submit' sx={{
+                                        backgroundColor: "#236DC9", color: "white", fontWeight: "bold", "&:hover": {
+                                            backgroundColor: "#154178"
+                                        }
+                                    }} disabled={!formik.dirty}>
+                                        Submit
+                                    </Button>
+                                    <Button sx={{
+                                        backgroundColor: "#FF0000", color: "white", fontWeight: "bold", "&:hover": {
+                                            backgroundColor: "#880808"
+                                        }
+                                    }} onClick={handleClose}>
+                                        Cancel
+                                    </Button>
+                                </div>
 
                             </form>
                         </Box>
