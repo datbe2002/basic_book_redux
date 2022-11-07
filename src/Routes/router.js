@@ -20,6 +20,7 @@ import { AnimatePresence } from "framer-motion";
 import React from 'react'
 import PrivateRoute from "../Components/PrivateRoute";
 import ModifyPage from "../Components/ModifyPage";
+import AddBook from "../Components/AddBook";
 
 export default function Router() {
     const element = useRoutes(
@@ -42,6 +43,10 @@ export default function Router() {
                     {
                         path: '/modify-page',
                         element: <ModifyPage />,
+                    },
+                    {
+                        path: '/add-book',
+                        element: <AddBook />,
                     },
 
                 ]

@@ -11,11 +11,13 @@ import { Paper } from '@mui/material';
 import Description from './Description';
 import DeleteBook from './DeleteBook';
 import UpdateBook from './UpdateBook';
-
+import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
+import { useNavigate } from 'react-router-dom';
 // import { deleteUserForm, updateUserFormName } from "../Redux/Form";
 
 export default function ModifyPage() {
 
+    const nav = useNavigate()
 
     const [bookList, setBookList] = useState([]);
     const [isReload, setIsReload] = useState(0);
@@ -36,6 +38,10 @@ export default function ModifyPage() {
 
     const handleReload = () => {
         setIsReload(isReload + 1);
+    }
+    const handleNavToAddPage = () => {
+        let path = "/add-book"
+        nav(path)
     }
 
     return (
@@ -70,8 +76,20 @@ export default function ModifyPage() {
                         </TableBody>
                     </Table>
                 </Box>
+                <Box p={5} sx={{ display: "flex", justifyContent: "right" }}>
+                    <Paper>
+                        <Button onClick={handleNavToAddPage}>
+                            <AddBoxOutlinedIcon />
+
+                        </Button>
+
+
+                    </Paper>
+                </Box>
+
 
             </Paper>
+
         </Box>
 
     )
