@@ -51,6 +51,7 @@ export default function ModifyPage() {
                     <Table >
                         <TableHead>
                             <TableRow >
+                                <TableCell>Picture</TableCell>
                                 <TableCell>Name</TableCell>
                                 <TableCell>Quantity</TableCell>
                                 <TableCell>Description</TableCell>
@@ -60,6 +61,7 @@ export default function ModifyPage() {
                         <TableBody>
                             {bookList.map((book) => (
                                 <TableRow key={book.id}>
+                                    <img style={{ width: "50%", height: "auto" }} src={book.image}></img>
                                     <TableCell>{book.bookName}</TableCell>
                                     <TableCell>{book.quantity}</TableCell>
                                     <TableCell>
@@ -73,6 +75,7 @@ export default function ModifyPage() {
                                     </TableCell>
                                 </TableRow>
                             ))}
+
                         </TableBody>
                     </Table>
                 </Box>

@@ -1,4 +1,4 @@
-import { Container, Grid } from '@mui/material';
+import { Button, Container, Grid } from '@mui/material';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import Card from '@mui/material/Card';
@@ -6,6 +6,8 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
+import BookDetailPage from './BookDetailPage';
+import { Link } from 'react-router-dom';
 
 
 export default function HomePage() {
@@ -34,17 +36,18 @@ export default function HomePage() {
                             <CardActionArea>
                                 <CardMedia
                                     component="img"
-                                    height="140"
+                                    height="auto:(("
                                     image={book.image}
-                                    alt="green iguana"
+                                    alt={book.bookName}
                                 />
-                                <CardContent>
-                                    <Typography gutterBottom variant="h5" component="div">
+                                <CardContent sx={{ textAlign: "center", }}>
+                                    <Typography gutterBottom variant="h6" component="div">
                                         {book.bookName}
                                     </Typography>
-                                    <Typography variant="body2" color="text.secondary">
-                                        {book.description}
-                                    </Typography>
+                                    <Button sx={{ backgroundColor: "#36454F" }}>
+                                        <Link to={`/book-detail/${book.id}`} style={{ color: "white", fontWeight: "bold", textDecoration: "none" }}>Read more</Link>
+                                    </Button>
+
                                 </CardContent>
                             </CardActionArea>
                         </Card>

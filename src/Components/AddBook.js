@@ -26,7 +26,6 @@ export default function AddBook() {
                     bookName: newObject.bookName,
                     quantity: newObject.quantity,
                     description: newObject.description,
-
                 })
             }
             addNewBook()

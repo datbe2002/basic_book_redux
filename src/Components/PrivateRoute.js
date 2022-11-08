@@ -6,7 +6,7 @@ const PrivateRoute = () => {
     const { user } = UserAuth();
     // alert(user.auth)
     return (
-        user ? <Outlet /> : <Navigate to='/dashboard' />
+        user ? <Outlet /> : <Navigate to='/' />
     )
 }
 

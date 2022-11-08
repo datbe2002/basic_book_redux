@@ -6,21 +6,11 @@ import {
 import Login from "../Auth/Login";
 import HomePage from "../Components/HomePage";
 import { AnimatePresence } from "framer-motion";
-// export const router = createBrowserRouter([
-//     {
-//         path: "/",
-//         element: <div>Hello world!</div>,
-//     },
-//     // {
-//     //     path: "/dashboard",
-//     //     element: <Login />,
-//     // },
-// ]);
-
 import React from 'react'
 import PrivateRoute from "../Components/PrivateRoute";
 import ModifyPage from "../Components/ModifyPage";
 import AddBook from "../Components/AddBook";
+import BookDetailPage from "../Components/BookDetailPage";
 
 export default function Router() {
     const element = useRoutes(
@@ -34,14 +24,14 @@ export default function Router() {
                 element: <Login />,
             },
             {
-                path: "/dashboard",
-                element: <HomePage />,
+                path: "/book-detail/:id",
+                element: <BookDetailPage />,
             },
             {
                 element: <PrivateRoute />,
                 children: [
                     {
-                        path: '/modify-page',
+                        path: '/dashboard',
                         element: <ModifyPage />,
                     },
                     {
