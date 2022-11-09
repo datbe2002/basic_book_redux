@@ -8,27 +8,40 @@ import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import BookDetailPage from './BookDetailPage';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllBooks } from '../Redux/apiRequest';
 
 
 export default function HomePage() {
-    const [bookList, setBookList] = useState([]);
+    const bookList = useSelector((state) => state.books.books?.allBooks);
+    const dispatch = useDispatch();
+    console.log(bookList)
+    // const [bookList, setBookList] = useState([]);
+    // useEffect(() => {
+    //     async function fetchBooks() {
+    //         const data = await axios.get('https://6362307666f75177ea28c41b.mockapi.io/books');
+
+    //         const books = data.data
+
+    //         setBookList(books)
+    //         console.log(books)
+
+    //     }
+    //     fetchBooks()
+
+    // }, [])
+
     useEffect(() => {
-        async function fetchBooks() {
-            const data = await axios.get('https://6362307666f75177ea28c41b.mockapi.io/books');
 
-            const books = data.data
-
-            setBookList(books)
-            console.log(books)
-
-        }
-        fetchBooks()
-
-    }, [])
+        // if (user?.accessToken) {
+        //     getAllUsers(user?.accessToken, dispatch)
+        // }
+        getAllBooks(dispatch)
+    }, []);
 
     return (
         <Container sx={{ mt: 5 }}>
-            <Typography variant='h3' sx={{ fontWeight: "bold", textAlign: "center", mb: 5 }}>Collection</Typography>
+            <Typography variant='h4' sx={{ fontWeight: "bold", textAlign: "center", mb: 5 }}>Book</Typography>
             <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
                 {bookList.map(book =>
                     <Grid item xs={2} sm={4} md={4} key={book.id}>

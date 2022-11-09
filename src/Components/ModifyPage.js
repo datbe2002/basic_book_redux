@@ -7,33 +7,35 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Paper } from '@mui/material';
+import { Paper, Typography } from '@mui/material';
 import Description from './Description';
 import DeleteBook from './DeleteBook';
 import UpdateBook from './UpdateBook';
 import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllBooks } from '../Redux/apiRequest';
 // import { deleteUserForm, updateUserFormName } from "../Redux/Form";
 
 export default function ModifyPage() {
 
     const nav = useNavigate()
-
-    const [bookList, setBookList] = useState([]);
+    const dispatch = useDispatch()
+    const bookList = useSelector((state) => state.books.books?.allBooks);
     const [isReload, setIsReload] = useState(0);
 
     useEffect(() => {
-        async function fetchBooks() {
-            const data = await axios.get('https://6362307666f75177ea28c41b.mockapi.io/books');
+        // async function fetchBooks() {
+        //     const data = await axios.get('https://6362307666f75177ea28c41b.mockapi.io/books');
 
-            const books = data.data
+        //     const books = data.data
 
-            setBookList(books)
-            console.log(books)
+        //     setBookList(books)
+        //     console.log(books)
 
-        }
-        fetchBooks()
-
+        // }
+        // fetchBooks()
+        getAllBooks(dispatch)
     }, [isReload])
 
     const handleReload = () => {
@@ -46,9 +48,22 @@ export default function ModifyPage() {
 
     return (
         <Box p={5}>
-            <Paper>
-                <Box p={5}>
+            <Box p={5}>
+                <Box p={5} sx={{ display: "flex", justifyContent: "right", alignItems: "center", gap: 5 }}>
+                    <Typography variant='h6'>Add a new book</Typography>
+
+                    <Paper>
+                        <Button onClick={handleNavToAddPage}>
+                            <AddBoxOutlinedIcon />
+
+                        </Button>
+
+
+                    </Paper>
+                </Box>
+                <Paper>
                     <Table >
+
                         <TableHead>
                             <TableRow >
                                 <TableCell>Picture</TableCell>
@@ -78,20 +93,9 @@ export default function ModifyPage() {
 
                         </TableBody>
                     </Table>
-                </Box>
-                <Box p={5} sx={{ display: "flex", justifyContent: "right" }}>
-                    <Paper>
-                        <Button onClick={handleNavToAddPage}>
-                            <AddBoxOutlinedIcon />
+                </Paper>
 
-                        </Button>
-
-
-                    </Paper>
-                </Box>
-
-
-            </Paper>
+            </Box>
 
         </Box>
 

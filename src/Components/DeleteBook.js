@@ -1,12 +1,14 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material'
 import axios from 'axios';
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux';
+import { deleteBook } from '../Redux/apiRequest';
 
 export default function DeleteBook({ book, reload }) {
 
     const [open, setOpen] = useState(false);
     // const [idUser, setIdUser] = useState('');
-
+    const dispatch = useDispatch()
     const handleClickOpen = () => {
         setOpen(true);
     };
@@ -16,11 +18,10 @@ export default function DeleteBook({ book, reload }) {
     };
 
     const handleDeleteBook = async (id) => {
-        const DeleteUrl = `https://6362307666f75177ea28c41b.mockapi.io/books/${id}`
-
-        await axios.delete(DeleteUrl)
+        // const DeleteUrl = `https://6362307666f75177ea28c41b.mockapi.io/books/${id}`
+        // await axios.delete(DeleteUrl)
+        deleteBook(id, dispatch)
         reload()
-
     }
     return (
         <>

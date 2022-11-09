@@ -15,6 +15,7 @@ export default function UpdateBook({ book, reload }) {
     const formik = useFormik({
         initialValues: {
             id: book.id,
+            image: book.image,
             bookName: book.bookName,
             quantity: book.quantity,
             description: book.description,
@@ -29,6 +30,7 @@ export default function UpdateBook({ book, reload }) {
             async function updateBookData() {
 
                 const updateData = await axios.put(updateUrl, {
+                    image: newObject.image,
                     bookName: newObject.bookName,
                     quantity: newObject.quantity,
                     description: newObject.description,
@@ -42,6 +44,7 @@ export default function UpdateBook({ book, reload }) {
 
         },
         validationSchema: Yup.object({
+            image: Yup.string().required("Required.").min(10, "Must be 10 characters or more"),
             bookName: Yup.string().required("Required.").min(2, "Must be 2 characters or more"),
             quantity: Yup.number().integer().typeError("Please enter a valid number").required("Required."),
             description: Yup.string().required("Required.").min(10, "Must be 10 characters or more"),
@@ -80,8 +83,20 @@ export default function UpdateBook({ book, reload }) {
                             <form onSubmit={formik.handleSubmit}>
                                 <TextField
                                     fullWidth
+                                    label='Image'
+                                    placeholder='Type your image URL'
+                                    variant="outlined"
+                                    name='image'
+                                    value={formik.values.image}
+                                    onChange={formik.handleChange}
+                                    error={formik.touched.image && Boolean(formik.errors.image)}
+                                    helperText={formik.touched.image && formik.errors.image}>
+                                </TextField>
+                                <TextField
+                                    fullWidth
                                     label='Name'
                                     placeholder='Type your book name'
+                                    sx={{ marginTop: "20px" }}
                                     variant="outlined"
                                     name='bookName'
                                     value={formik.values.bookName}

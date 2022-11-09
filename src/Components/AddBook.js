@@ -3,13 +3,15 @@ import React from 'react'
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 export default function AddBook() {
-
+    const nav = useNavigate()
 
     const formik = useFormik({
         initialValues: {
             id: '',
+            image: '',
             bookName: '',
             quantity: '',
             description: '',
@@ -23,14 +25,18 @@ export default function AddBook() {
 
             const addNewBook = async () => {
                 await axios.post(addBookUrl, {
+                    image: newObject.image,
                     bookName: newObject.bookName,
                     quantity: newObject.quantity,
                     description: newObject.description,
                 })
             }
             addNewBook()
+
         },
         validationSchema: Yup.object({
+
+            image: Yup.string().required("Required.").min(10, "Must be 10 characters or more"),
             bookName: Yup.string().required("Required.").min(2, "Must be 2 characters or more"),
             quantity: Yup.number().integer().typeError("Please enter a valid number").required("Required."),
             description: Yup.string().required("Required.").min(10, "Must be 10 characters or more"),
@@ -55,8 +61,21 @@ export default function AddBook() {
                     <form onSubmit={formik.handleSubmit}>
                         <TextField
                             fullWidth
+                            label='Image'
+                            placeholder='Type your image URL'
+                            variant="outlined"
+                            name='image'
+                            value={formik.values.image}
+                            onChange={formik.handleChange}
+                            error={formik.touched.image && Boolean(formik.errors.image)}
+                            helperText={formik.touched.image && formik.errors.image}>
+
+                        </TextField>
+                        <TextField
+                            fullWidth
                             label='Name'
                             placeholder='Type your book name'
+                            sx={{ marginTop: "20px" }}
                             variant="outlined"
                             name='bookName'
                             value={formik.values.bookName}
@@ -94,7 +113,7 @@ export default function AddBook() {
                                 backgroundColor: "#236DC9", color: "white", fontWeight: "bold", "&:hover": {
                                     backgroundColor: "#154178"
                                 }
-                            }} disabled={!formik.dirty}>
+                            }} disabled={!formik.dirty} onClick={() => nav('/dashboard')}>
                                 Add
                             </Button>
                         </div>

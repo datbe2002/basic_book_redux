@@ -33,7 +33,7 @@ export default function Login() {
                     <Box p={5} >
                         <Typography variant='h6'>Click the button below to login</Typography>
                         <GoogleButton onClick={handleGoogleSignIn} />
-                        <div style={{ color: 'red' }} id="Warning"></div>
+                        <div style={{ color: 'red', textAlign: "center", marginTop: 20 }} id="Warning"></div>
                     </Box>
                 </Paper>
             </Box>

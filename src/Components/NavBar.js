@@ -14,6 +14,7 @@ import Tooltip from '@mui/material/Tooltip';
 import AdbIcon from '@mui/icons-material/Adb';
 import { Link } from 'react-router-dom';
 import { UserAuth } from '../AuthContext';
+import { Divider } from '@mui/material';
 const pages = ['Home', 'About', 'News'];
 function NavBar() {
     const { user, logOut } = UserAuth();
@@ -42,7 +43,7 @@ function NavBar() {
     return (
         <div style={{ position: "static" }}>
             <Container maxWidth="xl">
-                <Toolbar disableGutters>
+                <Toolbar disableGutters sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                     <Typography
                         variant="h6"
                         noWrap
@@ -60,10 +61,17 @@ function NavBar() {
                     >
                         TIKI
                     </Typography>
-
-                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                        <Link to={'/'} style={{ textDecoration: "none", color: "black" }}>Home</Link>
+                    <Box sx={{ display: "flex" }}>
+                        <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+                            <Link to={'/'} style={{ textDecoration: "none", color: "black" }}>Home</Link>
+                        </Box>
+                        <Box sx={{ mx: 5, flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+                            <Link to={'/about'} style={{ textDecoration: "none", color: "black" }}>About</Link>
+                        </Box>
                     </Box>
+
+
+
                     <Box sx={{ flexGrow: 0 }}>
                         {user?.displayName ? (
                             <div>
@@ -99,7 +107,7 @@ function NavBar() {
                         ) : (
                             <Link to='/login' style={{ textDecoration: "none" }} >
                                 <Button
-                                    sx={{ my: 2, color: 'black', display: 'block' }}
+                                    sx={{ fontWeight: "bold", my: 2, color: 'black', display: 'block' }}
                                 >
                                     Sign in
                                 </Button>
@@ -107,6 +115,7 @@ function NavBar() {
                         )}
                     </Box>
                 </Toolbar>
+                <Divider></Divider>
             </Container>
         </div>
     );

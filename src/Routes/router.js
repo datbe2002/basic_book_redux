@@ -11,6 +11,7 @@ import PrivateRoute from "../Components/PrivateRoute";
 import ModifyPage from "../Components/ModifyPage";
 import AddBook from "../Components/AddBook";
 import BookDetailPage from "../Components/BookDetailPage";
+import About from "../Components/About";
 
 export default function Router() {
     const element = useRoutes(
@@ -27,6 +28,11 @@ export default function Router() {
                 path: "/book-detail/:id",
                 element: <BookDetailPage />,
             },
+            {
+                path: "/about",
+                element: <About />,
+            },
+
             {
                 element: <PrivateRoute />,
                 children: [
