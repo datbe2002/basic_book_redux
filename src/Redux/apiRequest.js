@@ -1,13 +1,15 @@
 import axios from "axios";
 
 import {
-
-    getBooksStart,
-    getBooksSuccess,
-    getBooksFailed,
-    deleteBookStart,
-    deleteBookSuccess,
-    deleteBookFailed
+  getBooksStart,
+  getBooksSuccess,
+  getBooksFailed,
+  deleteBookStart,
+  deleteBookSuccess,
+  deleteBookFailed,
+  addNewBookStart,
+  addNewBookSuccess,
+  addNewBookFailed,
 } from "./Book";
 
 // export const loginUser = async (user, dispatch, navigate) => {
@@ -37,26 +39,50 @@ import {
 // };
 
 export const getAllBooks = async (dispatch) => {
-    dispatch(getBooksStart());
-    try {
-        const res = await axios.get('https://6362307666f75177ea28c41b.mockapi.io/books');
-        console.log(res.data);
+  dispatch(getBooksStart());
+  try {
+    const res = await axios.get(
+      "https://6362307666f75177ea28c41b.mockapi.io/books"
+    );
+    console.log(res.data);
 
-        dispatch(getBooksSuccess(res.data));
-    } catch (err) {
-        dispatch(getBooksFailed());
-    }
+    dispatch(getBooksSuccess(res.data));
+  } catch (err) {
+    dispatch(getBooksFailed());
+  }
+};
+
+export const addNewBook = async (dispatch, newObject) => {
+  dispatch(addNewBookStart());
+  try {
+    const res = await axios.post(
+      "https://6362307666f75177ea28c41b.mockapi.io/books",
+      {
+        image: newObject.image,
+        bookName: newObject.bookName,
+        quantity: newObject.quantity,
+        description: newObject.description,
+      }
+    );
+    console.log(res.data);
+
+    dispatch(addNewBookSuccess(res.data));
+    getAllBooks(dispatch);
+  } catch (err) {
+    dispatch(addNewBookFailed());
+  }
 };
 
 export const deleteBook = async (id, dispatch) => {
-    dispatch(deleteBookStart());
-    try {
-        const res = await axios.delete(`https://6362307666f75177ea28c41b.mockapi.io/books/${id}`);
-        dispatch(deleteBookSuccess(res.data));
-        console.log(res.data);
-        getAllBooks(dispatch);
-    } catch (error) {
-        dispatch(deleteBookFailed(error.response.data));
-    }
+  dispatch(deleteBookStart());
+  try {
+    const res = await axios.delete(
+      `https://6362307666f75177ea28c41b.mockapi.io/books/${id}`
+    );
+    dispatch(deleteBookSuccess(res.data));
+    console.log(res.data);
+    getAllBooks(dispatch);
+  } catch (error) {
+    dispatch(deleteBookFailed(error.response.data));
+  }
 };
-
