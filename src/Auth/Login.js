@@ -16,7 +16,7 @@ export default function Login() {
     }
   };
   useEffect(() => {
-    if (user != null && user.email === "truongtandat1409@gmail.com") {
+    if (user != null) {
       navigate("/dashboard");
       // } else {
       //   if (user != null && user.email !== "truongtandat1409@gmail.com") {
