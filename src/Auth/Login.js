@@ -3,7 +3,6 @@ import GoogleButton from "react-google-button";
 import { UserAuth } from "../AuthContext";
 import { useNavigate } from "react-router-dom";
 import { Box, Container, Paper, Typography } from "@mui/material";
-import { deleteUser, getAuth } from "firebase/auth";
 export default function Login() {
   const { googleSignIn, user } = UserAuth();
   // const auth = getAuth();
@@ -25,7 +24,7 @@ export default function Login() {
       //     deleteUser(cuser);
       //   }
     }
-  }, [user]);
+  }, [user, navigate]);
   return (
     <Container sx={{ minHeight: "85vh" }}>
       <Box p={5}>
