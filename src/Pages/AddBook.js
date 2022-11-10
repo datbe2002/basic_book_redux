@@ -21,7 +21,7 @@ export default function AddBook() {
     onSubmit: (values) => {
       const newObject = values;
 
-      addNewBook(dispatch, newObject);
+      addNewBook(dispatch, newObject, nav);
     },
     validationSchema: Yup.object({
       image: Yup.string()
@@ -125,11 +125,6 @@ export default function AddBook() {
                   },
                 }}
                 disabled={!formik.dirty}
-                onClick={() => {
-                  setTimeout(() => {
-                    nav("/dashboard");
-                  }, 5000);
-                }}
               >
                 Add
               </Button>

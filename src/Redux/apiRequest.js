@@ -10,33 +10,10 @@ import {
   addNewBookStart,
   addNewBookSuccess,
   addNewBookFailed,
+  updateBookStart,
+  updateBookFailed,
+  updateBookSuccess,
 } from "./Book";
-
-// export const loginUser = async (user, dispatch, navigate) => {
-//   dispatch(loginStart());
-//   try {
-//     const res = await axios.post("http://localhost:8000/api/login", user);
-
-//     dispatch(loginSuccess(res.data));
-
-//     if (res.data.user?.role === "Admin") {
-//       navigate("/");
-//     } else {
-//       navigate("/user");
-//     }
-//   } catch (err) {
-//     dispatch(loginFailed(err.response.data));
-//   }
-// };
-
-// export const registerUser = (user, dispatch, navigate) => {
-//   dispatch(registerStart());
-
-//   axios
-//     .post("http://localhost:8000/api/register", user)
-//     .then(() => dispatch(registerSuccess()), navigate("/login"))
-//     .catch((err) => dispatch(registerFailed(err.response.data.message)));
-// };
 
 export const getAllBooks = async (dispatch) => {
   dispatch(getBooksStart());
@@ -52,7 +29,7 @@ export const getAllBooks = async (dispatch) => {
   }
 };
 
-export const addNewBook = async (dispatch, newObject) => {
+export const addNewBook = async (dispatch, newObject, nav) => {
   dispatch(addNewBookStart());
   try {
     const res = await axios.post(
@@ -68,8 +45,30 @@ export const addNewBook = async (dispatch, newObject) => {
 
     dispatch(addNewBookSuccess(res.data));
     getAllBooks(dispatch);
+    nav("/dashboard");
   } catch (err) {
     dispatch(addNewBookFailed());
+  }
+};
+
+export const updateBook = async (dispatch, newObject) => {
+  dispatch(updateBookStart());
+  try {
+    const res = await axios.put(
+      `https://6362307666f75177ea28c41b.mockapi.io/books/${newObject.id}`,
+      {
+        image: newObject.image,
+        bookName: newObject.bookName,
+        quantity: newObject.quantity,
+        description: newObject.description,
+      }
+    );
+    console.log(res.data);
+
+    dispatch(updateBookSuccess(res.data));
+    getAllBooks(dispatch);
+  } catch (err) {
+    dispatch(updateBookFailed());
   }
 };
 

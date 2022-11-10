@@ -45,6 +45,17 @@ const Book = createSlice({
       state.books.isFetching = false;
       state.books.error = true;
     },
+    updateBookStart: (state) => {
+      state.books.isFetching = true;
+    },
+    updateBookSuccess: (state, action) => {
+      state.books.isFetching = false;
+      state.books.update = action.payload;
+    },
+    updateBookFailed: (state) => {
+      state.books.isFetching = false;
+      state.books.error = true;
+    },
   },
 });
 
@@ -59,4 +70,7 @@ export const {
   addNewBookStart,
   addNewBookSuccess,
   addNewBookFailed,
+  updateBookStart,
+  updateBookFailed,
+  updateBookSuccess,
 } = Book.actions;

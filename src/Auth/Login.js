@@ -6,8 +6,8 @@ import { Box, Container, Paper, Typography } from "@mui/material";
 import { deleteUser, getAuth } from "firebase/auth";
 export default function Login() {
   const { googleSignIn, user } = UserAuth();
-  const auth = getAuth();
-  const cuser = auth.currentUser;
+  // const auth = getAuth();
+  // const cuser = auth.currentUser;
   const navigate = useNavigate();
   const handleGoogleSignIn = async () => {
     try {
@@ -19,15 +19,15 @@ export default function Login() {
   useEffect(() => {
     if (user != null && user.email === "truongtandat1409@gmail.com") {
       navigate("/dashboard");
-    } else {
-      if (user != null && user.email !== "truongtandat1409@gmail.com") {
-        document.getElementById("Warning").innerHTML = "You are not admin";
-        deleteUser(cuser);
-      }
+      // } else {
+      //   if (user != null && user.email !== "truongtandat1409@gmail.com") {
+      //     document.getElementById("Warning").innerHTML = "You are not admin";
+      //     deleteUser(cuser);
+      //   }
     }
   }, [user]);
   return (
-    <Container>
+    <Container sx={{ minHeight: "85vh" }}>
       <Box p={5}>
         <Paper
           sx={{

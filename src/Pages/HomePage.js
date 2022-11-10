@@ -47,7 +47,15 @@ export default function HomePage() {
                   <Typography gutterBottom variant="h6" component="div">
                     {book.bookName}
                   </Typography>
-                  <Button sx={{ backgroundColor: "#36454F" }}>
+                  <Button
+                    sx={{
+                      backgroundColor: "#36454F",
+                      "&:hover": {
+                        color: "white",
+                        backgroundColor: "#343434",
+                      },
+                    }}
+                  >
                     <Link
                       to={`/book-detail/${book.id}`}
                       style={{
